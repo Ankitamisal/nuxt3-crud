@@ -23,7 +23,7 @@
             </table>
         </form>
         <br>
-        <input type="search" class="form-control relative flex-auto min-w-0 block w-50 px-3 py-1.5 text-base font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded " placeholder="Search" @click="userFindByName(userName)" v-model="userName" id="userName" name="userName"/> <br>
+        <input type="search" class="form-control relative flex-auto min-w-0 block w-50 px-3 py-1.5 text-base font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded " placeholder="Search" @keyup="userFindByName(userName)" v-model="userName" id="userName" name="userName"/> <br>
        
       <button class="btn inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black " type="button">
       Search</button>
