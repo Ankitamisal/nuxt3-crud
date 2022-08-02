@@ -1,177 +1,185 @@
 <template>
-<Add />
-<main class="flex justify-center ">
-    <div class="w-3/2">
-
-        <form @submit="formSubmit" class="bg-gray-100 border-2 px-12 bg-gradient-to-r from-cyan-300 to-blue-200">
+<main class="flex justify-center w-3/2 ">
+    <div>
+         <!-- <h1 id="formName" class="text-blue Sm:text-3xl item-center font-bold ml-8">Add User</h1> -->
+        <form @submit="formSubmit" class="bg-gray-100 border-blue-400 rounded-lg border-2 px-12">
             <table>
-
-                <h2 class="text-teal-900 text-xl font-bold pt-6">Information Form</h2>
+                <h2 id="formEditName" class="text-teal-900 text-xl font-bold pt-6">Add user</h2>
                 <hr />
                 <br />
-
-                <NuxtLink v-slot="{ navigate }" to="/Add" target="_blank" custom>
-                    <button @click="navigate" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Add
-                    </button>
-                </NuxtLink><br><br>
-                <label class="pt-10 py-10 " for="firstname">Full name:</label><br />
-                <input type="text" v-model="user.fname" id="firstname" name="fname" placeholder="Enter your Full name" /><br /><br />
-                <label for="address"> address: </label><br />
-                <input type="text" v-model="user.address" id="address" name="address" placeholder="Enter your address" />
-                <br /><br />
-                <label for="number">Phone Number: </label><br />
-                <input type="number" v-model="user.number" id="number" name="number" placeholder="Enter your number" />
-                <br /><br />
-                <label for="text">Email: </label><br />
-                <input type="email" v-model="user.email" id="email" name="email" placeholder="Enter your Email-id" />
-                <br /><br />
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="fname">Full name:</label>
+                <input type="text" id="fname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " v-model="user.fname" required>
+            
+                <label for="number" class="block  text-sm font-medium text-gray-900 dark:text-gray-300">Phone Number: </label>
+                <input type="number" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "  maxlength="9" v-model="user.number" required>
+                <label for="text" class="block text-sm font-medium text-gray-900 dark:text-gray-300">email </label>
+                <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="user.email" required>
+                <label for="address" id="address">Address</label>
+                <textarea name="address" id="address"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-4 dark:bg-gray-700 dark:border-gray-600 " v-model="user.address" required></textarea><br/>
                 <div>
-                    <button class="py-1 px-5 mr-5 bg-black hover:bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white font-bold text-center rounded-md mb-3" type="submit" @click="formSubmit" id="btnsub"> Submit </button>
-                    <button class="py-1 px-5 bg-black hover:bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white font-bold text-center rounded-md mb-3" type="reset"> Reset </button>
-                    <div>
-
-                    </div>
+                    <button  id="submit" class="py-1 px-5 mr-5  bg-black hover:bg-blue-400 text-white font-bold text-center rounded-md mb-1" type="submit" @click="formSubmit" > Submit </button>
+                    <button class="py-1 px-5 bg-black hover:bg-blue-400 text-white font-bold text-center rounded-md mb-3" type="reset"> Reset </button>
                 </div>
             </table>
-
         </form>
-    </div>
-    <br>
-    <table class="list">
-
-        <!-- <div class="border-2 border-gray-200 rounded">
-            <input type="text" class="px-4 py-2" placeholder="Search...">
-            <button class="px-4 text-white bg-gray-600 border-l " @click="userFindByName(Name)">
-                Search
-            </button>
-        </div> -->
-            
-<div class="flex items-center justify-center ">
-    <div class="flex border-2 border-gray-200 rounded">
-        <input type="text" class="px-4 py-2 w-80" placeholder="Search...">
-        <button class="px-4 text-white bg-gray-600 border-l " @click="userFindByName()">
-            Search
-        </button>
-    </div>
-</div>
-        <div class="flex items-center justify-center w:3/2">
-
-
-
+        <br>
+        <input type="search" class="form-control relative flex-auto min-w-0 block w-50 px-3 py-1.5 text-base font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded " placeholder="Search" @click="userFindByName(userName)" v-model="userName" id="userName" name="userName"/> <br>
+       
+      <button class="btn inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black " type="button">
+      Search</button>
+     <!-- <input type="text" id="myInput" @click="myFunction" placeholder="Search for names.." title="Type in a name"> -->
+        <br/>
+        <br/>
+        <table class="list" id="list">
+            <div class="w:1/3">
             <tr>
-
                 <!-- <th class="px-4 border-black rounded-lg border-2">id</th> -->
-                <th class="px-8 border-blue-400 rounded-lg border-1">Full Name</th>
-                <!-- <th class="px-4 border-blue-400 rounded-lg border-4">Last Name</th> -->
-                <th class="px-8 border-blue-400 rounded-lg border-1">Address</th>
-                <th class="px-8 border-blue-400 rounded-lg border-1">Email</th>
-                <th class="px-8 border-blue-400 rounded-lg border-1">Contact No</th>
-                <th class="px-8 border-blue-400 rounded-lg border-1">Action</th>
-          
+                <th class="px-4 border-blue-400 rounded-lg border-4">Full Name</th>
+                <th class="px-4 border-blue-400 rounded-lg border-4">Phone Number</th>
+                <th class="px-4 border-blue-400 rounded-lg border-4">Email</th>
+                <th class="px-4 border-blue-400 rounded-lg border-4">Address</th>
+              
+            </tr>
             <tr v-for="(item,index) in users" v-bind:index="index" :key="item">
                 <!-- <td class="px-4 border-black rounded-lg border-2">{{item.id=i+1}}</td> -->
-                <td class="px-2 border-blue-400 rounded-lg border-2">{{item.fname}}</td>
-                <!-- <td class="px-4 border-blue-400 rounded-lg border-4">{{item.lastname}}</td> -->
-                <td class="px-2 border-blue-400 rounded-lg border-2">{{item.address}}</td>
-                <td class="px-2 border-blue-400 rounded-lg border-2">{{item.email}}</td>
-                <td class="px-2 border-blue-400 rounded-lg border-2">{{item.number}}</td>
-                <td class="px-2 border-blue-400 rounded-lg border-2">{{item.Action}}
-                    <button class="mx-3 rounded-lg bg-red-600 hover:bg-red-700 text-white w-20" @click="userDelete(index)">
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.fname}}</td>
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.number}}</td>
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.email}}</td>
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.address}}</td>
+                    <button  class="mx-3 rounded-lg bg-red-600 hover:bg-red-700 text-white w-20" @click="userDelete(index)">
                         Delete
                     </button>
                     <button class="mx-3 rounded-lg bg-green-600 hover:bg-green-600 text-white w-20" @click="onEdit(index)">
                         Edit
                     </button>
-                </td>
-                  </tr>
+                
             </tr>
-        </div>
-    </table>
-
+         </div> 
+        </table>
+         
+    </div>
+    <div>
+           <table class="list" id="list">
+            <div class="w:1/3">
+            <tr>
+                <!-- <th class="px-4 border-black rounded-lg border-2">id</th> -->
+                <th class="px-4 border-blue-400 rounded-lg border-4">Full Name</th>
+                <th class="px-4 border-blue-400 rounded-lg border-4">Phone Number</th>
+                <th class="px-4 border-blue-400 rounded-lg border-4">Email</th>
+                <th class="px-4 border-blue-400 rounded-lg border-4">Address</th>
+              
+            </tr>
+            <tr v-for="(item,index) in users" v-bind:index="index" :key="item">
+                <!-- <td class="px-4 border-black rounded-lg border-2">{{item.id=i+1}}</td> -->
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.fname}}</td>
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.number}}</td>
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.email}}</td>
+                <td class="px-4 border-blue-400 rounded-lg border-4">{{item.address}}</td>
+                
+            </tr>
+         </div> 
+         
+        </table>
+  </div>
 </main>
 </template>
-
 <script>
 export default {
     data() {
         return {
-
+            search : '',
             isEdit: false,
             indexEdit: -1,
-            Name: '',
-            userFound: [],
-            users: [],
-            allUserData : [],
+            userName:'',
+            userEmail:'',
+            userAddress:'',
+            userFound:[],
+            users:[],
+             name1:'',
+            name2:'',
+            email1:'',
+            email2:'',
+            mobile1:'',
+            mobile2:'',
             user: {
                 fname: '',
-                // lastname: '',
-                address: '',
-                email: '',
                 number: '',
+                email: '',
+                address: '',
             },
-            search: '',
         };
-
     },
     methods: {
         formSubmit(event) {
-            event.preventDefault();
-            document.getElementById("btnsub").innerHTML = 'Submit'
+            event.preventDefault(event);
+            console.log(this.user);
             if (this.isEdit == true) {
                 this.users[this.indexEdit] = this.user;
                 this.isEdit = false;
                 this.indexEdit = -1;
-                alert('Successfully Updated')
+                 confirm(' data Successfully Updated');
             } else {
                 this.users.push(this.user);
-                alert('Data Added')
+                confirm('Data is successfully added');
             }
             this.user = {
                 fname: '',
-                lastname: '',
-                address: '',
+                number: '',
                 email: '',
-                number: ''
+                address: '',
             };
+             console.log(" User Form Values", this.users);
+                const formHead = document.getElementById('formEditName');
+            formHead.innerText = 'Add User';
+            const myButton = document.getElementById('submit');
+            myButton.innerText = 'Submit';
         },
-        onReset(event) {
-            event.preventDefault();
-            this.form.email = "";
-            this.form.name = "";
-            this.form.address = "";
-            this.form.contact = "";
-            this.form.city = ""
-        },
+        // onReset(event) {
+        //     event.preventDefault();
+        //     this.form.email = "";
+        //     this.form.name = "";
+        //     this.form.address = "";
+        //     this.form.contact = "";
+        //     this.form.city=""
         userDelete(index) {
+            if(confirm('you want to delet data ?')){
             this.users.splice(index, 1)
+            }
+              const formHead = document.getElementById('formEditName');
+            formHead.innerText = 'Add User';
+            const myButton = document.getElementById('submit');
+            myButton.innerText = 'Submit';
         },
         onEdit(index) {
-            document.getElementById("btnsub").innerHTML = 'Update'
+            document.getElementById("submit").innerHTML='Update'
             this.user.fname = this.users[index].fname;
-            // this.user.lastname=this.users[index].lastname;
-            this.user.address = this.users[index].address;
-            this.user.email = this.users[index].email;
             this.user.number = this.users[index].number;
+            this.user.email = this.users[index].email;
+            this.user.address = this.users[index].address;
             this.isEdit = true;
             this.indexEdit = index;
-        },
 
-        userFindByName(Name) {
-            console.log(Name);
-            this.userFound = this.allUserData.filter((e) => {
-                if (e.fname == Name) {
+             const formHead = document.getElementById('formEditName');
+            formHead.innerText = 'Edit User';
+            const myButton = document.getElementById('submit');
+            myButton.innerText = 'Update';
+            this.isEdit=true;
+            this.indexEdit = index;
+        },
+        
+     userFindByName(userName){         
+            console.log(userName);
+            this.userFound = this.users.filter((e) => {
+                // if(e.name == userName)
+                if(e.name.startWith(userName)){
                     console.log(e);
+                    // if(e.name.startsWith(userName))
                     return e;
                     // alert("user Found" + e.firstName+ ""+e.lastName);
-                    alert('not found')
                 }
-            });
-            console.log(this.userFound)
-            alert('user is here')
-
-        }
-
+            }); 
+            console.log(this.userFound);           
+        },
     }
 }
 </script>
