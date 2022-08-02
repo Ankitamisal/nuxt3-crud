@@ -69,7 +69,7 @@
                 <th class="px-4 border-blue-400 rounded-lg border-4">Address</th>
               
             </tr>
-            <tr v-for="(item,index) in users" v-bind:index="index" :key="item">
+            <tr v-for="item in userFound" :key="item">
                 <!-- <td class="px-4 border-black rounded-lg border-2">{{item.id=i+1}}</td> -->
                 <td class="px-4 border-blue-400 rounded-lg border-4">{{item.fname}}</td>
                 <td class="px-4 border-blue-400 rounded-lg border-4">{{item.number}}</td>
@@ -95,12 +95,8 @@ export default {
             userAddress:'',
             userFound:[],
             users:[],
-             name1:'',
-            name2:'',
-            email1:'',
-            email2:'',
-            mobile1:'',
-            mobile2:'',
+             fname1:'',
+            fname2:'',
             user: {
                 fname: '',
                 number: '',
@@ -171,7 +167,7 @@ export default {
             console.log(userName);
             this.userFound = this.users.filter((e) => {
                 // if(e.name == userName)
-                if(e.name.startWith(userName)){
+                if(e.fname.startsWith(userName)){
                     console.log(e);
                     // if(e.name.startsWith(userName))
                     return e;
